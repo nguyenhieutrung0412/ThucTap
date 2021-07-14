@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -14,9 +15,23 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//get layout product
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'ViewProduct'])->name('home');
+//get layout product
+Route::get('/product',[App\Http\Controllers\HomeController::class,'ViewProduct'])->name('product');
+//get layout add product
+Route::get('/addproduct',[App\Http\Controllers\HomeController::class,'ViewAddProduct'])->name('addproduct');
+//post data to save product
+Route::post('/saveproduct',[App\Http\Controllers\HomeController::class, 'getSaveProduct'])->name('saveproduct');
+//get layout edit product
+Route::get('/editproduct/{id}',[App\Http\Controllers\HomeController::class,'ViewEditProduct'])->name('editproduct');
+//post data to edit
+Route::post('/saveedit/{id}',[App\Http\Controllers\HomeController::class, 'getSaveEdit'])->name('saveedit');
+//get function controller to delete product
+Route::get('/deleteproduct/{id}',[App\Http\Controllers\HomeController::class,'DeleteProduct'])->name('deleteproduct');
+//get function logout
+Route::get('/logout', [App\Http\Controllers\HomeController::class, 'Logout'])->name('logout');
